@@ -1,0 +1,3 @@
+rootProject.name = 'BasilischiPreparationTask1'
+
+include ':app'
