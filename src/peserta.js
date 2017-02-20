@@ -1,7 +1,7 @@
 var Peserta = {
   name: "Arya Utama Putra",
-  image: "img/foto_profile_arya.jpg",
-  batch: "Basilischi"
+  image: "/img/profile_image_arya.png",
+  batch: "Batch #2 - Basilischi"
 }
 
 export default Peserta ;

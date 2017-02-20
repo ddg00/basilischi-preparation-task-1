@@ -7,14 +7,13 @@ const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  name: {
+    fontSize: 25,
+    textAlign: 'center',
+  },
+  batch: {
     fontSize: 20,
     textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
     marginBottom: 5,
   },
 });

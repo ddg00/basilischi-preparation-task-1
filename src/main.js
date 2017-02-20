@@ -5,20 +5,17 @@ import {
   Image
 } from 'react-native';
 import styles from './style';
+import peserta from './peserta';
 
 class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
+        <Text style={styles.batch}>
+          {peserta.batch}
         </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
+        <Text style={styles.name}>
+          {peserta.name}
         </Text>
       </View>
     );
