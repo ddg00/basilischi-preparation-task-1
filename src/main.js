@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
+import styles from './style';
 
 class App extends Component {
   render() {
