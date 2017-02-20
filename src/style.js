@@ -8,13 +8,14 @@ const Styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   name: {
-    fontSize: 25,
+    fontSize: 28,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   batch: {
-    fontSize: 20,
+    fontSize: 22,
     textAlign: 'center',
-    marginBottom: 5,
+    margin:5,
   },
 });
 
