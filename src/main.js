@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import {
-  Text,
-  Image,
-  View
+  Navigator,
+  Text
 } from 'react-native';
 import Task1 from './task1/index';
-
-// line 16 <Image source={require('./img/'+peserta.image)} /> not working
 
 class App extends Component {
   render() {
     return (
-      <Task1 />
+      <Navigator
+          initialRoute={{id: 'task1Page', name: 'Task1'}}
+          renderScene={this.renderScene.bind(this)}
+          configureScene={(route) => {
+            if (route.sceneConfig) {
+              return route.sceneConfig;
+            }
+            return Navigator.SceneConfigs.FloatFromRight;
+          }}
+      />
     );
+  }
+
+  renderScene(route, navigator) {
+    var routeId = route.id;
+    if (routeId === 'task1Page') {
+      return <Task1
+          navigator={navigator} />;
+    }
+    return <Task1 navigator={navigator} />;
   }
 }
 
