@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
 import {
   Text,
-  Image,
   View,
+  TextInput,
   Navigator,
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
 import styles from '../style';
-import peserta from './peserta';
 
-// line 16 <Image source={require('./img/'+peserta.image)} /> not working
+class Task2 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {sayText: ''};
+  }
 
-class Task1 extends Component {
+  renderScene(route, navigator) {
+    return (
+      <View style={styles.container2}>
+        <Text style={styles.title}>
+          Write Something !!
+        </Text>
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1, alignSelf: 'stretch', textAlign: 'center', padding: 5}}
+          onChangeText={(text) => this.setState({sayText: text})}
+        />
+        <Text style={styles.say}>
+          {this.state.sayText}
+        </Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <Navigator
@@ -26,50 +45,36 @@ class Task1 extends Component {
           } />
     );
   }
-
-  renderScene(route, navigator) {
-    return (
-      <View style={styles.container1}>
-        <Image source={require('../img/profile_image_arya.png')} />
-        <Text style={styles.batch}>
-          {peserta.batch}
-        </Text>
-        <Text style={styles.name}>
-          {peserta.name}
-        </Text>
-      </View>
-    );
-  }
 }
 
 var NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
-    return null
-  },
-
-  RightButton(route, navigator, index, navState) {
     return (
       <TouchableOpacity
           onPress={() =>
             navigator.parentNavigator.push({
-              id: 'task2Page',
-              name: 'task2',
+              id: 'task1Page',
+              name: 'task1',
             })
           }>
         <Text style={{color: 'white', margin: 10,}}>
-          Task 2
+          Task 1
         </Text>
       </TouchableOpacity>
     );
   },
 
+  RightButton(route, navigator, index, navState) {
+    return null;
+  },
+
   Title(route, navigator, index, navState) {
     return (
         <Text style={{color:'white', margin: 10, fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
-          Task 1
+          Task 2
         </Text>
     );
   }
 }
 
-export default Task1;
+export default Task2;
