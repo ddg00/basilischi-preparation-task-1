@@ -8,11 +8,44 @@ import {
   TouchableOpacity
 } from 'react-native';
 import styles from '../style';
+import crud from './controller';
 
 class Task2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {sayText: ''};
+    this.state = {
+      form: '',
+      title: '',
+      body: ''
+    };
+  }
+
+  request(req, data){
+    let request = {};
+    request.method = req;
+    request.headers = {
+      Accept: 'application/json',
+      Content-Type: 'application/json',
+    }
+    if (data){
+      request.body = JSON.stringify(data);
+    }
+
+    return request;
+  }
+
+
+  componentWillMount(){
+    fetch('http://jsonplaceholder.typicode.com/posts/', this.request('GET','1') )
+    .then((resp) => resp.json())
+    .then(function(data) {
+      console.log(data);
+      this.setState({title: data.title})
+      this.setState({body: data.body})
+    })
+    .catch(function(error) {
+      console.log(error);
+    });;
   }
 
   renderScene(route, navigator) {
@@ -23,14 +56,22 @@ class Task2 extends Component {
         </Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1, alignSelf: 'stretch', textAlign: 'center', padding: 5}}
-          onChangeText={(text) => this.setState({sayText: text})}
+          onChangeText={(text) => this.setState({form: text})}
         />
         <Text style={styles.say}>
-          {this.state.sayText}
+          {this.state.form}
+        </Text>
+        <Text style={styles.say}>
+          {this.state.title}
+        </Text>
+        <Text style={styles.say}>
+          {this.state.body}
         </Text>
       </View>
     );
   }
+
+
 
   render() {
     return (
