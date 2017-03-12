@@ -10,7 +10,6 @@ var Styles = StyleSheet.create({
   container2: {
     flex:0,
     marginTop: 75,
-    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
@@ -33,6 +32,15 @@ var Styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     margin:5,
+  },
+  row:{
+    flexDirection: 'row',
+    height: 100,
+  },
+  listTitle:{
+    fontSize: 10,
+    textAlign: 'left',
+    fontWeight: 'bold',
   },
 });
 

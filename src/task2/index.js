@@ -11,21 +11,13 @@ import styles from '../style';
 import crud from './controller';
 
 class Task2 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      form: '',
-      title: '',
-      body: ''
-    };
-  }
 
   request(req, data){
     let request = {};
     request.method = req;
     request.headers = {
       Accept: 'application/json',
-      Content-Type: 'application/json',
+      ContentType: 'application/json'
     }
     if (data){
       request.body = JSON.stringify(data);
@@ -34,44 +26,50 @@ class Task2 extends Component {
     return request;
   }
 
-
-  componentWillMount(){
-    fetch('http://jsonplaceholder.typicode.com/posts/', this.request('GET','1') )
-    .then((resp) => resp.json())
-    .then(function(data) {
-      console.log(data);
-      this.setState({title: data.title})
-      this.setState({body: data.body})
+  getData(){
+    return fetch('http://jsonplaceholder.typicode.com/posts?userId=1')
+    .then((res) => {return res.json()})
+    .then((resData) => {
+      return resData;
     })
-    .catch(function(error) {
+    .catch((error) => {
       console.log(error);
-    });;
+    })
   }
 
   renderScene(route, navigator) {
-    return (
-      <View style={styles.container2}>
-        <Text style={styles.title}>
-          Write Something !!
-        </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1, alignSelf: 'stretch', textAlign: 'center', padding: 5}}
-          onChangeText={(text) => this.setState({form: text})}
-        />
-        <Text style={styles.say}>
-          {this.state.form}
-        </Text>
-        <Text style={styles.say}>
-          {this.state.title}
-        </Text>
-        <Text style={styles.say}>
-          {this.state.body}
-        </Text>
-      </View>
-    );
+    this.getData().then((list) => {
+
+      const contents = list.map((data) => {
+          return (
+            <View key={data.id} style={ styles.row }>
+              <Text style={styles.listTitle}>{data.title}</Text>
+            </View>
+          );
+       });
+       console.log(contents);
+       return (
+          <View style={styles.container2}>
+             { contents }
+          </View>
+        );
+    });
+
+
+    // const contents = this.getData().map((data) => {
+    //     return (
+    //       <View key={data.id} style={ styles.row }>
+    //         <Text>{data.title}</Text>
+    //       </View>
+    //     );
+    //  });
+    //
+    //  return (
+    //    <View style={styles.container2}>
+    //       { contents }
+    //    </View>
+    //  );
   }
-
-
 
   render() {
     return (
