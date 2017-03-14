@@ -20,32 +20,27 @@ class Task2 extends Component {
       dataSource: ds.cloneWithRows([{}]),
     };
 
-    this.getData().then((list) => {
+    crud.getData().then((list) => {
       this.setState({ dataSource: ds.cloneWithRows(list) });
     });
   }
 
-  getData(){
-    return fetch('http://jsonplaceholder.typicode.com/posts?userId=1')
-    .then((res) => {return res.json()})
-    .then((resData) => {
-      return resData;
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  _onPressButton(id){
+
   }
 
   renderScene(route, navigator) {
-
     return (
        <View style={styles.container2}>
          <ListView
            dataSource={this.state.dataSource}
            renderRow={(rowData) => (
+             <TouchableHighlight onPress={this._onPressButton(rowData.id)}>
              <View style={styles.listContainer}>
-                <Text style={styles.listTitle}>{rowData.id}</Text>
+                <Text style={styles.listId}>Id: {rowData.id}</Text>
+                <Text style={styles.listTitle}>Title: {rowData.title}</Text>
              </View>
+             </TouchableHighlight>
            )}
          />
        </View>

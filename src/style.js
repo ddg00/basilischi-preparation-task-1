@@ -34,11 +34,16 @@ var Styles = StyleSheet.create({
   },
   listContainer:{
     padding: 5,
+    borderBottomWidth: 1,
+  },
+  listId:{
+    fontSize: 15,
+    textAlign: 'left',
   },
   listTitle:{
     fontSize: 20,
     textAlign: 'left',
-    fontWeight: 'bold',
+    fontWeight: '400',
   },
 });
 

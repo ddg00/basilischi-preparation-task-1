@@ -1,4 +1,6 @@
-var crud = {
+const url = "http://jsonplaceholder.typicode.com/";
+
+const crud = {
 
   create(val){
     var data = {
@@ -9,17 +11,15 @@ var crud = {
     return requestData('POST', '', data);
   },
 
-  getAll(){
-    let data = {};
-    fetch('http://jsonplaceholder.typicode.com/posts/')
+  getData(){
+    return fetch(url+'posts?userId=1')
     .then((res) => {return res.json()})
     .then((resData) => {
-      console.log(resdata);
-      data = resData;
+      return resData;
     })
-    .catch(function(error) {
+    .catch((error) => {
       console.log(error);
-    });
+    })
   },
 
   update(val){
@@ -34,4 +34,4 @@ var crud = {
   },
 }
 
-export { crud };
+export default crud ;
