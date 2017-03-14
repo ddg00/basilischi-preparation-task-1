@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
+  ListView,
   TextInput,
   Navigator,
   TouchableHighlight,
@@ -12,18 +13,16 @@ import crud from './controller';
 
 class Task2 extends Component {
 
-  request(req, data){
-    let request = {};
-    request.method = req;
-    request.headers = {
-      Accept: 'application/json',
-      ContentType: 'application/json'
-    }
-    if (data){
-      request.body = JSON.stringify(data);
-    }
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows([{}]),
+    };
 
-    return request;
+    this.getData().then((list) => {
+      this.setState({ dataSource: ds.cloneWithRows(list) });
+    });
   }
 
   getData(){
@@ -38,37 +37,19 @@ class Task2 extends Component {
   }
 
   renderScene(route, navigator) {
-    this.getData().then((list) => {
 
-      const contents = list.map((data) => {
-          return (
-            <View key={data.id} style={ styles.row }>
-              <Text style={styles.listTitle}>{data.title}</Text>
-            </View>
-          );
-       });
-       console.log(contents);
-       return (
-          <View style={styles.container2}>
-             { contents }
-          </View>
-        );
-    });
-
-
-    // const contents = this.getData().map((data) => {
-    //     return (
-    //       <View key={data.id} style={ styles.row }>
-    //         <Text>{data.title}</Text>
-    //       </View>
-    //     );
-    //  });
-    //
-    //  return (
-    //    <View style={styles.container2}>
-    //       { contents }
-    //    </View>
-    //  );
+    return (
+       <View style={styles.container2}>
+         <ListView
+           dataSource={this.state.dataSource}
+           renderRow={(rowData) => (
+             <View style={styles.listContainer}>
+                <Text style={styles.listTitle}>{rowData.id}</Text>
+             </View>
+           )}
+         />
+       </View>
+    );
   }
 
   render() {
