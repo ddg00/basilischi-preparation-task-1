@@ -15,13 +15,12 @@ class Task2 extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
-      dataSource: ds.cloneWithRows([{}]),
+      dataSource: {},
     };
 
-    crud.get().then((list) => {
-      this.setState({ dataSource: ds.cloneWithRows(list) });
+    crud.getById(route.postId).then((data) => {
+      this.setState({ dataSource: data });
     });
   }
 
@@ -36,19 +35,10 @@ class Task2 extends Component {
   renderScene(route, navigator) {
     return (
        <View style={styles.container2}>
-         <ListView
-           dataSource={this.state.dataSource}
-           renderRow={(rowData) => (
-             <TouchableHighlight onPress={
-               ()=>this._onPressButton(rowData.id)
-             }>
              <View style={styles.listContainer}>
                 <Text style={styles.listId}>Id: {rowData.id}</Text>
                 <Text style={styles.listTitle}>Title: {rowData.title}</Text>
              </View>
-             </TouchableHighlight>
-           )}
-         />
        </View>
     );
   }

@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Task1 from './task1/index';
 import Task2 from './task2/index';
+import Task2View from './task2/view';
 
 class App extends Component {
   render() {
@@ -32,7 +33,10 @@ class App extends Component {
       return <Task2
           navigator={navigator} />;
     }
-    return <Task1 navigator={navigator} />;
+    if (routeId === 'task2View') {
+      return <Task2View
+          navigator={navigator} />;
+    }
   }
 }
 

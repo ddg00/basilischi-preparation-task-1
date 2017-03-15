@@ -11,8 +11,19 @@ const crud = {
     return requestData('POST', '', data);
   },
 
-  getData(){
+  get(){
     return fetch(url+'posts?userId=1')
+    .then((res) => {return res.json()})
+    .then((resData) => {
+      return resData;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },
+
+  getById(id){
+    return fetch(url+'posts?userId=1&id='+id)
     .then((res) => {return res.json()})
     .then((resData) => {
       return resData;
