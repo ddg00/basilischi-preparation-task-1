@@ -6,6 +6,7 @@ import {
 import Task1 from './task1/index';
 import Task2 from './task2/index';
 import Task2View from './task2/view';
+import Task2Edit from './task2/edit';
 
 class App extends Component {
   render() {
@@ -37,6 +38,11 @@ class App extends Component {
       return <Task2View
           navigator={navigator} postId={route.postId}/>;
     }
+    if (routeId === 'task2Edit') {
+      return <Task2Edit
+          navigator={navigator} postId={route.postId}/>;
+    }
+    return <Task1 navigator={navigator} />;
   }
 }
 

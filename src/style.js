@@ -62,6 +62,26 @@ var Styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'left',
     fontWeight: '300',
+  },
+  EditContainer:{
+    padding: 5,
+  },
+  editLabel:{
+    fontSize: 20,
+    textAlign: 'left',
+    fontWeight: 'bold',
+  },
+  editFormTitle:{
+    fontWeight: '300',
+    textAlignVertical: 'top',
+    marginBottom:10,
+
+  },
+  editFormBody:{
+    borderWidth: 1,
+    borderColor: 'gray',
+    textAlignVertical: 'top',
+    fontWeight: '300',
   }
 });
 

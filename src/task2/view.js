@@ -19,18 +19,10 @@ class Task2View extends Component {
       postId: this.props.postId,
       dataSource: ds.cloneWithRows([{}]),
     };
-
+    postId = this.state.postId;
     crud.getById(this.state.postId).then((list) => {
       this.setState({ dataSource: ds.cloneWithRows(list) });
     });
-  }
-
-  _onPressButton(id){
-    this.props.navigator.push({
-      id: 'task2View',
-      name: 'Post ID:'+id,
-      postId: id,
-    })
   }
 
   renderScene(route, navigator) {
@@ -64,7 +56,9 @@ class Task2View extends Component {
   }
 }
 
-var NavigationBarRouteMapper = {
+let postId = '';
+
+const NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     return (
       <TouchableOpacity
@@ -88,6 +82,7 @@ var NavigationBarRouteMapper = {
             navigator.parentNavigator.push({
               id: 'task2Edit',
               name: 'Edit Post',
+              postId: postId,
             })
           }>
         <Text style={{color: 'white', margin: 10,}}>
@@ -100,7 +95,7 @@ var NavigationBarRouteMapper = {
   Title(route, navigator, index, navState) {
     return (
         <Text style={{color:'white', margin: 10, fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
-          Post
+          Post ID: {postId}
         </Text>
     );
   }

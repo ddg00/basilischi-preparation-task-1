@@ -33,6 +33,22 @@ const crud = {
     })
   },
 
+  getById2(id){
+    return fetch(url+'posts?userId=1&id='+id)
+    .then((res) => {return res.json()})
+    .then((resData) => {
+      const data = {
+        postId: resData.id,
+        title: resData.title,
+        body: resData.body
+      };
+      return data;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },
+
   update(val){
     var data = {
       body: val

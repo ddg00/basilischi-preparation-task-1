@@ -15,18 +15,21 @@ class Task2View extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       postId: this.props.postId,
-      dataSource: ds.cloneWithRows([{}]),
+      postTitle: '',
+      postBody: '',
     };
 
+    postId = this.state.postId;
     crud.getById(this.state.postId).then((list) => {
-      this.setState({ dataSource: ds.cloneWithRows(list) });
+      const data = list[0];
+      this.setState({postTitle: data.title});
+      this.setState({postBody: data.body});
     });
   }
 
-  _onPressButton(id){
+  _onPressSubmitButton(){
     this.props.navigator.push({
       id: 'task2View',
       name: 'Post ID:'+id,
@@ -37,15 +40,24 @@ class Task2View extends Component {
   renderScene(route, navigator) {
     return (
       <View style={styles.container2}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => (
-            <View style={styles.postContainer}>
-               <Text style={styles.postTitle}>{rowData.title}</Text>
-               <Text style={styles.postBody}>{rowData.body}</Text>
+            <View style={styles.editContainer}>
+               <Text style={styles.editLabel}>Title</Text>
+               <TextInput
+                  style={styles.editFormTitle}
+                  numberOfLines={2}
+                  onChangeText={(text) => this.setState({postTitle: text})}
+                  value={this.state.postTitle}
+                  multiline={true}
+               />
+               <Text style={styles.editLabel}>Content</Text>
+               <TextInput
+                  style={styles.editFormBody}
+                  numberOfLines={5}
+                  onChangeText={(text) => this.setState({postBody: text})}
+                  value={this.state.postBody}
+                  multiline={true}
+               />
             </View>
-          )}
-        />
       </View>
     );
   }
@@ -65,43 +77,34 @@ class Task2View extends Component {
   }
 }
 
-var NavigationBarRouteMapper = {
+let postId = '';
+
+const NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     return (
       <TouchableOpacity
           onPress={() =>
             navigator.parentNavigator.push({
-              id: 'task2Page',
-              name: 'task2',
+              id: 'task2View',
+              name: 'Post ID:'+postId,
+              postId: ''+postId,
             })
           }>
         <Text style={{color: 'white', margin: 10,}}>
-          All Post
+          Back
         </Text>
       </TouchableOpacity>
     );
   },
 
   RightButton(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-          onPress={() =>
-            navigator.parentNavigator.push({
-              id: 'task2Edit',
-              name: 'Edit Post',
-            })
-          }>
-        <Text style={{color: 'white', margin: 10,}}>
-          Edit
-        </Text>
-      </TouchableOpacity>
-    );
+    return null;
   },
 
   Title(route, navigator, index, navState) {
     return (
         <Text style={{color:'white', margin: 10, fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
-          Post
+          Edit Post ID: {postId}
         </Text>
     );
   }
