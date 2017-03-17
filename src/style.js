@@ -8,9 +8,13 @@ var Styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   container2: {
-    flex:0,
-    marginTop: 75,
+    flex:1,
+    marginTop: 65,
     backgroundColor: '#F5FCFF',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   name: {
     fontSize: 28,
@@ -45,6 +49,20 @@ var Styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: '400',
   },
+  postContainer:{
+    padding: 5,
+  },
+  postTitle:{
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  postBody:{
+    marginTop: 20,
+    fontSize: 16,
+    textAlign: 'left',
+    fontWeight: '300',
+  }
 });
 
 export default Styles;

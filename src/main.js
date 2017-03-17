@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <Navigator
-          initialRoute={{id: 'task2Page', name: 'Task1'}}
+          initialRoute={{id: 'task2Page', name: 'Task1', postId: ''}}
           renderScene={this.renderScene.bind(this)}
           configureScene={(route) => {
             if (route.sceneConfig) {
@@ -31,11 +31,11 @@ class App extends Component {
     }
     if (routeId === 'task2Page') {
       return <Task2
-          navigator={navigator} />;
+          navigator={navigator} postId={route.postId} />;
     }
     if (routeId === 'task2View') {
       return <Task2View
-          navigator={navigator} />;
+          navigator={navigator} postId={route.postId}/>;
     }
   }
 }

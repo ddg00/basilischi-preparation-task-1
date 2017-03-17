@@ -3,6 +3,7 @@ import {
   Text,
   View,
   ListView,
+  TextInput,
   Navigator,
   TouchableHighlight,
   TouchableOpacity
@@ -10,16 +11,17 @@ import {
 import styles from '../style';
 import crud from './controller';
 
-class Task2 extends Component {
+class Task2View extends Component {
 
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
+      postId: this.props.postId,
       dataSource: ds.cloneWithRows([{}]),
     };
 
-    crud.get().then((list) => {
+    crud.getById(this.state.postId).then((list) => {
       this.setState({ dataSource: ds.cloneWithRows(list) });
     });
   }
@@ -28,27 +30,23 @@ class Task2 extends Component {
     this.props.navigator.push({
       id: 'task2View',
       name: 'Post ID:'+id,
-      postId: ''+id,
+      postId: id,
     })
   }
 
   renderScene(route, navigator) {
     return (
-       <View style={styles.container2}>
-         <ListView
-           dataSource={this.state.dataSource}
-           renderRow={(rowData) => (
-             <TouchableHighlight onPress={
-               ()=>this._onPressButton(rowData.id)
-             }>
-             <View style={styles.listContainer}>
-                <Text style={styles.listId}>Id: {rowData.id}</Text>
-                <Text style={styles.listTitle}>Title: {rowData.title}</Text>
-             </View>
-             </TouchableHighlight>
-           )}
-         />
-       </View>
+      <View style={styles.container2}>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={(rowData) => (
+            <View style={styles.postContainer}>
+               <Text style={styles.postTitle}>{rowData.title}</Text>
+               <Text style={styles.postBody}>{rowData.body}</Text>
+            </View>
+          )}
+        />
+      </View>
     );
   }
 
@@ -73,28 +71,40 @@ var NavigationBarRouteMapper = {
       <TouchableOpacity
           onPress={() =>
             navigator.parentNavigator.push({
-              id: 'task1Page',
-              name: 'task1',
+              id: 'task2Page',
+              name: 'task2',
             })
           }>
         <Text style={{color: 'white', margin: 10,}}>
-          Task 1
+          All Post
         </Text>
       </TouchableOpacity>
     );
   },
 
   RightButton(route, navigator, index, navState) {
-    return null;
+    return (
+      <TouchableOpacity
+          onPress={() =>
+            navigator.parentNavigator.push({
+              id: 'task2Edit',
+              name: 'Edit Post',
+            })
+          }>
+        <Text style={{color: 'white', margin: 10,}}>
+          Edit
+        </Text>
+      </TouchableOpacity>
+    );
   },
 
   Title(route, navigator, index, navState) {
     return (
         <Text style={{color:'white', margin: 10, fontSize: 16, textAlign: 'center', fontWeight: 'bold'}}>
-          Task 2
+          Post
         </Text>
     );
   }
 }
 
-export default Task2;
+export default Task2View;
