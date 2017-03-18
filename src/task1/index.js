@@ -30,7 +30,7 @@ class Task1 extends Component {
   renderScene(route, navigator) {
     return (
       <View style={styles.container1}>
-        <Image source={require('../img/profile_image_arya.png')} />
+        <Image source={require('../img/profile_image.png')} />
         <Text style={styles.batch}>
           {peserta.batch}
         </Text>
