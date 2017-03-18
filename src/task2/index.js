@@ -94,7 +94,7 @@ var NavigationBarRouteMapper = {
             })
           }>
         <Text style={{color: 'white', margin: 10,}}>
-          Task 1
+          Add
         </Text>
       </TouchableOpacity>
     );

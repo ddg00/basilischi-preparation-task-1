@@ -33,6 +33,30 @@ const crud = {
     })
   },
 
+  create(val){
+    return fetch(url+'posts/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        title: val.title,
+        body: val.body,
+        userId: 1
+      })
+    })
+    .then((res) => {return res.json()})
+    .then((resData) => {
+      console.log('Update Response');
+      console.log(resData);
+      return resData;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },
+
   update(val){
     return fetch(url+'posts/'+val.id, {
       method: 'PUT',
