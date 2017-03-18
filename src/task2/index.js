@@ -43,7 +43,7 @@ class Task2 extends Component {
              }>
              <View style={styles.listContainer}>
                 <Text style={styles.listId}>Id: {rowData.id}</Text>
-                <Text style={styles.listTitle}>Title: {rowData.title}</Text>
+                <Text style={styles.listTitle}>{rowData.title}</Text>
              </View>
              </TouchableHighlight>
            )}
@@ -85,7 +85,19 @@ var NavigationBarRouteMapper = {
   },
 
   RightButton(route, navigator, index, navState) {
-    return null;
+    return (
+      <TouchableOpacity
+          onPress={() =>
+            navigator.parentNavigator.push({
+              id: 'task2Create',
+              name: 'Create New',
+            })
+          }>
+        <Text style={{color: 'white', margin: 10,}}>
+          Task 1
+        </Text>
+      </TouchableOpacity>
+    );
   },
 
   Title(route, navigator, index, navState) {

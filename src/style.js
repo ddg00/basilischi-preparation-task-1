@@ -10,6 +10,7 @@ var Styles = StyleSheet.create({
   container2: {
     flex:1,
     marginTop: 65,
+    padding: 5,
     backgroundColor: '#F5FCFF',
     top: 0,
     bottom: 0,
@@ -38,7 +39,8 @@ var Styles = StyleSheet.create({
   },
   listContainer:{
     padding: 5,
-    borderBottomWidth: 1,
+    borderBottomWidth: 2,
+    borderColor: 'gray',
   },
   listId:{
     fontSize: 15,
@@ -63,8 +65,8 @@ var Styles = StyleSheet.create({
     textAlign: 'left',
     fontWeight: '300',
   },
-  EditContainer:{
-    padding: 5,
+  editContainer:{
+    padding: 10,
   },
   editLabel:{
     fontSize: 20,
@@ -75,13 +77,13 @@ var Styles = StyleSheet.create({
     fontWeight: '300',
     textAlignVertical: 'top',
     marginBottom:10,
-
+    fontSize: 15,
   },
   editFormBody:{
-    borderWidth: 1,
     borderColor: 'gray',
     textAlignVertical: 'top',
     fontWeight: '300',
+    fontSize: 15,
   }
 });
 

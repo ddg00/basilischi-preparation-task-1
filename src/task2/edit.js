@@ -5,6 +5,8 @@ import {
   ListView,
   TextInput,
   Navigator,
+  Button,
+  Alert,
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
@@ -29,12 +31,19 @@ class Task2View extends Component {
     });
   }
 
-  _onPressSubmitButton(){
-    this.props.navigator.push({
-      id: 'task2View',
-      name: 'Post ID:'+id,
-      postId: id,
-    })
+  _onPressSave(){
+    let val = {
+      id: this.state.postId,
+      title: this.state.postTitle,
+      body: this.state.postBody
+    }
+    crud.update(val).then((res) => {
+      const data = res;
+      Alert.alert(
+        'Update Response',
+        '{ userId: '+data.userId+', id: '+data.id+', title: "'+data.title+'", body: "'+data.body+'" }'
+      );
+    });
   }
 
   renderScene(route, navigator) {
@@ -57,6 +66,7 @@ class Task2View extends Component {
                   value={this.state.postBody}
                   multiline={true}
                />
+               <Button onPress={() => this._onPressSave()} title="Save" color="#841584" />
             </View>
       </View>
     );

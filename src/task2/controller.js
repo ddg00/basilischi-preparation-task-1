@@ -33,27 +33,29 @@ const crud = {
     })
   },
 
-  getById2(id){
-    return fetch(url+'posts?userId=1&id='+id)
+  update(val){
+    return fetch(url+'posts/'+val.id, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: val.id,
+        title: val.title,
+        body: val.body,
+        userId: 1
+      })
+    })
     .then((res) => {return res.json()})
     .then((resData) => {
-      const data = {
-        postId: resData.id,
-        title: resData.title,
-        body: resData.body
-      };
-      return data;
+      console.log('Update Response');
+      console.log(resData);
+      return resData;
     })
     .catch((error) => {
       console.log(error);
     })
-  },
-
-  update(val){
-    var data = {
-      body: val
-    }
-    return requestData('PATCH','1',data);
   },
 
   delete(){
