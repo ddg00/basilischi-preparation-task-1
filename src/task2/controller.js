@@ -1,16 +1,6 @@
 const url = "http://jsonplaceholder.typicode.com/";
 
 const crud = {
-
-  create(val){
-    var data = {
-      title: 'Crud Test',
-      body: val,
-      userId: 1
-    }
-    return requestData('POST', '', data);
-  },
-
   get(){
     return fetch(url+'posts?userId=1')
     .then((res) => {return res.json()})
@@ -82,8 +72,19 @@ const crud = {
     })
   },
 
-  delete(){
-    return requestData('DELETE');
+  delete(id){
+    return fetch(url+'posts/'+id, {
+      method: 'DELETE',
+    })
+    .then((res) => {return res.json()})
+    .then((resData) => {
+      console.log('Delete Response');
+      console.log(resData);
+      return resData;
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   },
 }
 

@@ -4,6 +4,8 @@ import {
   View,
   ListView,
   Navigator,
+  Button,
+  Alert,
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native';
@@ -14,29 +16,63 @@ class Task2View extends Component {
 
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     this.state = {
       postId: this.props.postId,
-      dataSource: ds.cloneWithRows([{}]),
+      dataSource: {},
     };
     postId = this.state.postId;
     crud.getById(this.state.postId).then((list) => {
-      this.setState({ dataSource: ds.cloneWithRows(list) });
+      this.setState({ dataSource: list[0] });
     });
+  }
+
+  _onPressEdit(navigator){
+    navigator.parentNavigator.push({
+      id: 'task2Edit',
+      name: 'Edit Post',
+      postId: this.state.postId,
+    })
+  }
+
+  _onPressDelete(){
+    Alert.alert(
+      'Attention',
+      'Are you sure to delete this Post',
+      [
+        {
+          text: 'Delete',
+          onPress: () => {
+            crud.delete(this.state.postId).then(()=>{
+              Alert.alert(
+                'Attention',
+                'Post Deleted !',
+              )
+            });
+          }
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel'
+        },
+      ]);
   }
 
   renderScene(route, navigator) {
     return (
       <View style={styles.container2}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData) => (
-            <View style={styles.postContainer}>
-               <Text style={styles.postTitle}>{rowData.title}</Text>
-               <Text style={styles.postBody}>{rowData.body}</Text>
-            </View>
-          )}
-        />
+        <View style={styles.postContainer}>
+           <Text style={styles.postTitle}>{this.state.dataSource.title}</Text>
+           <Text style={styles.postBody}>{this.state.dataSource.body}</Text>
+        </View>
+        <View style={styles.buttonContainer} >
+          <View style={styles.editButtonContainer} >
+            <Button onPress={() => this._onPressEdit(navigator)} title="Edit" color='#7B68EE' style={styles.editButton}/>
+          </View>
+          <View style={styles.deleteButtonContainer} >
+            <Button onPress={() => this._onPressDelete()} title="Delete" color="#FF4500" />
+          </View>
+        </View>
+
       </View>
     );
   }
@@ -56,8 +92,6 @@ class Task2View extends Component {
   }
 }
 
-let postId = '';
-
 const NavigationBarRouteMapper = {
   LeftButton(route, navigator, index, navState) {
     return (
@@ -76,20 +110,7 @@ const NavigationBarRouteMapper = {
   },
 
   RightButton(route, navigator, index, navState) {
-    return (
-      <TouchableOpacity
-          onPress={() =>
-            navigator.parentNavigator.push({
-              id: 'task2Edit',
-              name: 'Edit Post',
-              postId: postId,
-            })
-          }>
-        <Text style={{color: 'white', margin: 10,}}>
-          Edit
-        </Text>
-      </TouchableOpacity>
-    );
+    return null;
   },
 
   Title(route, navigator, index, navState) {

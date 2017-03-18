@@ -61,25 +61,35 @@ var Styles = StyleSheet.create({
   },
   postBody:{
     marginTop: 20,
+    marginBottom:50,
     fontSize: 16,
     textAlign: 'left',
     fontWeight: '300',
   },
+  editButtonContainer:{
+    padding: 5,
+  },
+  deleteButtonContainer:{
+    padding: 5,
+  },
+  buttonContainer:{
+    flexDirection: 'column',
+  },
   editContainer:{
     padding: 10,
   },
-  editLabel:{
+  formLabel:{
     fontSize: 20,
     textAlign: 'left',
     fontWeight: 'bold',
   },
-  editFormTitle:{
+  formTitle:{
     fontWeight: '300',
     textAlignVertical: 'top',
     marginBottom:10,
     fontSize: 15,
   },
-  editFormBody:{
+  formBody:{
     borderColor: 'gray',
     textAlignVertical: 'top',
     fontWeight: '300',

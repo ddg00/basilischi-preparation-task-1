@@ -50,17 +50,17 @@ class Task2View extends Component {
     return (
       <View style={styles.container2}>
             <View style={styles.editContainer}>
-               <Text style={styles.editLabel}>Title</Text>
+               <Text style={styles.formLabel}>Title</Text>
                <TextInput
-                  style={styles.editFormTitle}
+                  style={styles.formTitle}
                   numberOfLines={2}
                   onChangeText={(text) => this.setState({postTitle: text})}
                   value={this.state.postTitle}
                   multiline={true}
                />
-               <Text style={styles.editLabel}>Content</Text>
+               <Text style={styles.formLabel}>Content</Text>
                <TextInput
-                  style={styles.editFormBody}
+                  style={styles.formBody}
                   numberOfLines={5}
                   onChangeText={(text) => this.setState({postBody: text})}
                   value={this.state.postBody}
